@@ -1,0 +1,9 @@
+venv/
+__pycache__/
+*.pyc
+instance/
+.env
+migrations/
+DB.sql
+config.py
+.env
