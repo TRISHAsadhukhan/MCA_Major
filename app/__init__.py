@@ -21,5 +21,8 @@ def create_app():
     # register blueprints
     from app.routes.auth import auth
     app.register_blueprint(auth, url_prefix="/api/auth")
+    
+    from app.routes.classroom import classroom_bp
+    app.register_blueprint(classroom_bp,url_prefix="/api/classroom")
  
     return app
