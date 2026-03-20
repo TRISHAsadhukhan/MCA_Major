@@ -1,8 +1,9 @@
 from app.models.user import User
 from app.models.refresh_token import RefreshToken
+from app.models.token_blacklist import TokenBlacklist
 from app.extensions import db , bcrypt
 
-from flask_jwt_extended import create_access_token , create_refresh_token , decode_token
+from flask_jwt_extended import create_access_token , create_refresh_token , decode_token , get_jwt
 
 
 
@@ -93,3 +94,23 @@ def rotate_refresh_token(old_token):
         "access_token": new_access_token,
         "refresh_token": new_refresh_token
     }, 200
+    
+    
+def logout_user():
+
+    jwt_data = get_jwt()
+
+    jti = jwt_data["jti"]
+    user_id = jwt_data["sub"]
+
+    # 1️⃣ blacklist access token
+    blacklisted = TokenBlacklist(jti=jti)
+    db.session.add(blacklisted)
+
+    # 2️⃣ revoke all refresh tokens of user
+    RefreshToken.query.filter_by(user_id=user_id, is_revoked=False)\
+        .update({"is_revoked": True})
+
+    db.session.commit()
+
+    return {"message": "Logout successful"}, 200

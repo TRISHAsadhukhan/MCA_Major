@@ -1,5 +1,5 @@
 from flask import Blueprint, request ,jsonify
-from app.services.auth_service import register_user , login_user , rotate_refresh_token
+from app.services.auth_service import register_user , login_user , rotate_refresh_token ,logout_user
 from flask_jwt_extended import  jwt_required
 from app.services.google_auth_service import google_login
 
@@ -55,6 +55,14 @@ def refresh():
     
     print(refresh_token)
     
+    return jsonify(response), status
+
+@auth.route("/logout", methods=["POST"])
+@jwt_required()
+def logout():
+
+    response, status = logout_user()
+
     return jsonify(response), status
 
 
