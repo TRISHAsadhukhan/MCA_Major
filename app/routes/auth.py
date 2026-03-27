@@ -57,6 +57,8 @@ def refresh():
     
     return jsonify(response), status
 
+
+
 @auth.route("/logout", methods=["POST"])
 @jwt_required()
 def logout():
