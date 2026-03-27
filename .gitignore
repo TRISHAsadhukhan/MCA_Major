@@ -3,7 +3,7 @@ __pycache__/
 *.pyc
 instance/
 .env
-migrations/
+# migrations/
 DB.sql
-config.py
+# config.py
 .env
