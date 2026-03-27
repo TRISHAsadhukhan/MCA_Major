@@ -99,7 +99,7 @@ def rotate_refresh_token(old_token):
 def logout_user():
 
     jwt_data = get_jwt()
-
+ 
     jti = jwt_data["jti"]
     user_id = jwt_data["sub"]
 
