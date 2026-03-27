@@ -1,19 +1,25 @@
 
 import os
+from dotenv import load_dotenv
 from datetime import timedelta
 
-class Config:
-    
-    SQLALCHEMY_DATABASE_URI = (
-        f"mysql+pymysql://{os.getenv('DB_USERNAME')}:"
-        f"{os.getenv('DB_PASSWORD')}@"
-        f"{os.getenv('DB_HOST')}/"
-        f"{os.getenv('DB_NAME')}"
-    )
+load_dotenv()
 
+class Config:
+    USER = os.getenv("user")
+    PASSWORD = os.getenv("password")
+    HOST = os.getenv("host")
+    PORT = os.getenv("port")
+    DBNAME = os.getenv("dbname")
+    
+    SQLALCHEMY_DATABASE_URI =  f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}?sslmode=require"
+    
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    
-    
+
+    SQLALCHEMY_ENGINE_OPTIONS = {
+        "pool_pre_ping": True
+    }
+       
     
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
     
