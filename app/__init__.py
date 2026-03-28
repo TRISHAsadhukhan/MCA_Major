@@ -13,7 +13,14 @@ def create_app():
     app.config.from_object(Config)
     
     #  IMPORTANT: Enable CORS (React connect korar jonno)
-    CORS(app)
+    CORS(app,
+         supports_credentials=True,
+         resources={r"/api/*": {
+             "origins": [
+                 "http://localhost:3000",  # dev
+                #  "https://your-frontend.vercel.app"  # production frontend
+             ]
+         }})
 
 
     # Init extensions
