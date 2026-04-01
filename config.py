@@ -1,7 +1,11 @@
 
+
 import os
 from dotenv import load_dotenv
 from datetime import timedelta
+from supabase import create_client
+
+
 
 load_dotenv()
 
@@ -27,3 +31,8 @@ class Config:
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=7)
     
     GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
+    
+    
+    SUPABASE_URL = os.getenv("SUPABASE_URL")
+    SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+    SUPABASE_BUCKET = os.getenv("SUPABASE_BUCKET")

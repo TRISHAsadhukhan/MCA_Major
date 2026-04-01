@@ -41,5 +41,8 @@ def create_app():
     
     from app.routes.health_check import health_check_bp
     app.register_blueprint(health_check_bp, url_prefix="/api/test")
+    
+    from app.routes.classroom_materials_route import file_bp
+    app.register_blueprint(file_bp, url_prefix="/api/classroom_materials")
 
     return app
