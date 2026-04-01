@@ -35,4 +35,6 @@ SQLAlchemy==2.0.46
 typing_extensions==4.15.0
 urllib3==2.6.3
 Werkzeug==3.1.5
-supabase==2.0.0
+supabase>=2.0.0
+httpx<0.28
+httpcore<0.18
