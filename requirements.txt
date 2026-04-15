@@ -51,4 +51,5 @@ Werkzeug==3.1.5
 # + httpx
 
 supabase==2.4.0
-httpx==0.25.2
+# httpx==0.25.2
+# httpcore==0.17.3

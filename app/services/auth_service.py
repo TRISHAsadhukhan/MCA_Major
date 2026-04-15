@@ -25,9 +25,22 @@ def register_user(name, email, password):
 
     db.session.add(user)
     db.session.commit()
+    
+    access_token = create_access_token(identity=str(user.Uid))
+    refresh_token = create_refresh_token(identity=str(user.Uid))
+
+    token_entry = RefreshToken(
+        user_id=user.Uid,
+        token=refresh_token
+    )
+    
+    db.session.add(token_entry)
+    db.session.commit()
 
     return {
-        "message": "User registered successfully"
+        "message": "User registered successfully",
+        "access_token": access_token,
+        "refresh_token": refresh_token,
     }, 201
 
 

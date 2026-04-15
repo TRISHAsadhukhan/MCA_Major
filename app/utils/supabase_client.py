@@ -9,3 +9,10 @@ supabase = create_client(
 )
 
 BUCKET = Config.SUPABASE_BUCKET
+
+
+import httpx
+import httpcore
+
+print("HTTPX VERSION:", httpx.__version__)
+print("HTTPCORE VERSION:", httpcore.__version__)

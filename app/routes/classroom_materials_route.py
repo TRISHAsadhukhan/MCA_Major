@@ -21,8 +21,11 @@ def upload(classroom_id):
     user_id = get_jwt_identity()
 
     classroom = Classroom.query.get_or_404(classroom_id)
+    
+    # print(type(user_id))
+    # print(type(classroom.created_by))
 
-    if classroom.creator_id != user_id:
+    if classroom.created_by != int(user_id):
         return {"error": "Only creator can upload"}, 403
 
     file = request.files.get("file")
@@ -85,7 +88,7 @@ def delete(file_id):
     file = File.query.get_or_404(file_id)
     classroom = Classroom.query.get(file.classroom_id)
 
-    if classroom.creator_id != user_id:
+    if classroom.created_by != int(user_id):
         return {"error": "Only creator can delete"}, 403
 
     delete_file(file)
